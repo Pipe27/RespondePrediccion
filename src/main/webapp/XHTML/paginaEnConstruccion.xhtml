@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+		 
+	<ui:define name="content">	
+			<h:form id="formDialog">
+				<p:messages id="msg" />
+				<p:growl id="men"/>
+				<p:tabMenu activeIndex="#{param.i}">
+						<p:menuitem value="Pestaña Temporal" outcome="/XHTML/respuesta.xhtml" icon="pi pi-star">
+					        <f:param name="i" value="0" />
+					    </p:menuitem>
+					    <p:menuitem value="Fútbol" outcome="/XHTML/paginaEnConstruccion.xhtml" icon="pi pi-star">
+					        <f:param name="i" value="0" />
+					    </p:menuitem>
+					    <p:menuitem value="Ciclismo" outcome="/XHTML/paginaEnConstruccion.xhtml" icon="pi pi-star">
+					        <f:param name="i" value="0" />
+					    </p:menuitem>
+					    <p:menuitem value="Noticias" outcome="/XHTML/paginaEnConstruccion.xhtml" icon="pi pi-star">
+					        <f:param name="i" value="0" />
+					    </p:menuitem>
+					    <p:menuitem value="Tecnología" outcome="/XHTML/paginaEnConstruccion.xhtml" icon="pi pi-star">
+					        <f:param name="i" value="0" />
+					    </p:menuitem>
+					    <p:menuitem value="Ocio" outcome="/XHTML/paginaEnConstruccion.xhtml" icon="pi pi-star">
+					        <f:param name="i" value="0" />
+					    </p:menuitem>
+					    <p:menuitem value="Clima" outcome="/XHTML/paginaEnConstruccion.xhtml" icon="pi pi-star">
+					        <f:param name="i" value="0" />
+					    </p:menuitem>
+					    <p:menuitem value="Gimnasio" outcome="/XHTML/paginaEnConstruccion.xhtml" icon="pi pi-star">
+					        <f:param name="i" value="0" />
+					    </p:menuitem>
+					    <p:menuitem value="Películas" outcome="/XHTML/paginaEnConstruccion.xhtml" icon="pi pi-star">
+					        <f:param name="i" value="0" />
+					    </p:menuitem>
+					</p:tabMenu>
+				<p:layout style="min-height:150px;">
+				    <p:layoutUnit position="center">
+				        <h2 align="center">Esta página se encuentra en construcción.</h2>
+				        <h3 align="center">Lamentamos los inconvenientes.</h3>
+				    </p:layoutUnit>
+				</p:layout>
+			</h:form>
+  </ui:define>
+</ui:composition>

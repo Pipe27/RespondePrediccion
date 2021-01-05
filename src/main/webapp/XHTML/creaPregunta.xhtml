@@ -1,0 +1,35 @@
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+     <h:head>
+     </h:head>
+     <h:body>
+         <h:form>
+         	<p:panel id="panel" header="Ingrese Nueva Pregunta">
+         		<h:panelGrid columns="2" border="1">
+         			<p:outputLabel value="Pregunta"/>
+         			<p:inputText id="txtPregunta" binding="#{creaPreguntaView.txtPregunta}" placeholder="Digite la pregunta" required="true"/>
+         			
+         			<p:outputLabel value="Respuesta"/>
+         			<p:inputText id="txtRespuesta" binding="#{creaPreguntaView.txtRespuesta}" placeholder="Digite la respuesta" required="true"/>
+         			
+         			<h:outputText id="listaCategoria" value="Categoría" />
+         			<p:selectOneMenu id="Categoria" binding="#{creaPreguntaView.somCategoria}" lazy="true">
+						<f:selectItems value="#{creaPreguntaView.lasCategoriasSelectItem}" />
+					</p:selectOneMenu>
+         		</h:panelGrid>
+         		
+         		<p:panel id="panelBotones" style="border:0px;">
+					<div align="center">
+						<p:commandButton id="btnSave" binding="#{creaPreguntaView.btnSave}" value="Guardar" action="#{creaPreguntaView.creaPreguntaNueva}"/>
+						<p:commandButton value="Limpiar" update="panel" process="@this" style="margin-right:20px;" >
+			                <p:resetInput target="panel" />
+			            </p:commandButton>
+					</div>
+				</p:panel>
+         	</p:panel>         
+         </h:form>
+     </h:body>
+</html>

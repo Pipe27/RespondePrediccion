@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+		 
+	<ui:define name="content">		
+
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableCategoria" header="CategoriaData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{categoriaView.data}" var="categoria"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{categoria.idCategoria}" sortBy="#{categoria.idCategoria}" >
+										 <f:facet name="header">
+										<h:outputText value="idCategoria"/>
+										</f:facet>
+										 <h:outputText value="#{categoria.idCategoria}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{categoria.categoria}" sortBy="#{categoria.categoria}" >
+										 <f:facet name="header">
+										<h:outputText value="Categoria"/>
+										</f:facet>
+										 <h:outputText value="#{categoria.categoria}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Options">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogCategoria"
+										actionListener="#{categoriaView.action_edit}">
+										<f:attribute name="selectedCategoria" value="#{categoria}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Delete" actionListener="#{categoriaView.action_delete_datatable}"
+										onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedCategoria" value="#{categoria}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{categoriaView.action_new()}" update=":dialogCategoria" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogCategoria" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{categoriaView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelCategoria" header="Categoria">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgIdCategoria" value="IdCategoria"/>
+									 <p:inputText id="txtIdCategoria" binding="#{categoriaView.txtIdCategoria}">
+									 <p:ajax update=":dialogCategoria" listener="#{categoriaView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgCategoria" value=" Categoria"/>
+									<p:inputText id="txtCategoria" disabled="true" binding="#{categoriaView.txtCategoria}"/>
+																		
+																    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{categoriaView.btnSave}" value="Save" action="#{categoriaView.action_save()}" update=":dialogCategoria :frm:panelDataTableCategoria" />
+									<p:commandButton id="btnClear" value="Clear" action="#{categoriaView.action_clear()}" update=":dialogCategoria" />
+									<p:commandButton id="btnExit" value="Exit" action="#{categoriaView.action_closeDialog()}" update=":dialogCategoria" />
+								</div>
+				</p:panel>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>
+

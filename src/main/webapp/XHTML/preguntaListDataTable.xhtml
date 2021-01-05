@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+		 
+	<ui:define name="content">		
+
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTablePregunta" header="PreguntaData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{preguntaView.data}" var="pregunta"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{pregunta.idPregunta}" sortBy="#{pregunta.idPregunta}" >
+										 <f:facet name="header">
+										<h:outputText value="idPregunta"/>
+										</f:facet>
+										 <h:outputText value="#{pregunta.idPregunta}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{pregunta.pregunta}" sortBy="#{pregunta.pregunta}" >
+										 <f:facet name="header">
+										<h:outputText value="Pregunta"/>
+										</f:facet>
+										 <h:outputText value="#{pregunta.pregunta}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{pregunta.idCategoria_Categoria}" sortBy="#{pregunta.idCategoria_Categoria}" >
+										 <f:facet name="header">
+										<h:outputText value="IdCategoria_Categoria"/>
+										</f:facet>
+										 <h:outputText value="#{pregunta.idCategoria_Categoria}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Options">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogPregunta"
+										actionListener="#{preguntaView.action_edit}">
+										<f:attribute name="selectedPregunta" value="#{pregunta}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Delete" actionListener="#{preguntaView.action_delete_datatable}"
+										onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedPregunta" value="#{pregunta}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{preguntaView.action_new()}" update=":dialogPregunta" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogPregunta" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{preguntaView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelPregunta" header="Pregunta">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgIdPregunta" value="IdPregunta"/>
+									 <p:inputText id="txtIdPregunta" binding="#{preguntaView.txtIdPregunta}">
+									 <p:ajax update=":dialogPregunta" listener="#{preguntaView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgPregunta" value=" Pregunta"/>
+									<p:inputText id="txtPregunta" disabled="true" binding="#{preguntaView.txtPregunta}"/>
+																		<h:outputText id="msgIdCategoria_Categoria" value=" IdCategoria_Categoria"/>
+									<p:inputText id="txtIdCategoria_Categoria" disabled="true" binding="#{preguntaView.txtIdCategoria_Categoria}"/>
+																		
+																    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{preguntaView.btnSave}" value="Save" action="#{preguntaView.action_save()}" update=":dialogPregunta :frm:panelDataTablePregunta" />
+									<p:commandButton id="btnClear" value="Clear" action="#{preguntaView.action_clear()}" update=":dialogPregunta" />
+									<p:commandButton id="btnExit" value="Exit" action="#{preguntaView.action_closeDialog()}" update=":dialogPregunta" />
+								</div>
+				</p:panel>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>
+
